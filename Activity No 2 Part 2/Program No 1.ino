@@ -16,43 +16,48 @@
         4       STOP          STOP
 */
 
-#include <AFMotor.h>
+// L298P Motor Driver
 
-AF_DCMotor motor1(1, MOTOR12_64KHZ);
-AF_DCMotor motor2(2, MOTOR12_64KHZ);
-
-int motorSpeed = 255;
+int pwmA = 10;
+int pwmB = 11;
+int enA = 12;
+int enB = 13;
 
 void setup() {
-    Serial.begin(9600);
+    pinMode(pwmA, OUTPUT);
+    pinMode(pwmB, OUTPUT);
+    pinMode(enA, OUTPUT);
+    pinMode(enB, OUTPUT);
 }
 
 void loop() {
     int userInput;
-    if (Serial.available() > 0) {
+    if(Serial.available() > 0) {
         userInput = Serial.parseInt();
         switch(userInput) {
             case 1:
-                motor1.setSpeed(motorSpeed);
-                motor1.run(FORWARD);
-                motor2.setSpeed(motorSpeed);
-                motor2.run(BACKWARD);
+                digitalWrite(pwmA, HIGH);
+                analogWrite(enA, 255);
+                digitalWrite(pwmB, HIGH);
+                analogWrite(enB, 255);
                 break;
             case 2:
-                motor1.setSpeed(motorSpeed / 2);
-                motor1.run(FORWARD);
-                motor2.setSpeed(motorSpeed);
-                motor2.run(BACKWARD);
+                digitalWrite(pwmA, HIGH);
+                analogWrite(enA, 255 * 0.5);
+                digitalWrite(pwmB, LOW);
+                analogWrite(enB, 255);
                 break;
             case 3:
-                motor1.setSpeed(motorSpeed);
-                motor1.run(FORWARD);
-                motor2.setSpeed(motorSpeed / 2);
-                motor2.run(BACKWARD);
+                digitalWrite(pwmA, HIGH);
+                analogWrite(enA, 255);
+                digitalWrite(pwmB, LOW);
+                analogWrite(enB, 255 * 0.5);
                 break;
             case 4:
-                motor1.run(RELEASE);
-                motor2.run(RELEASE);
+                digitalWrite(pwmA, LOW);
+                analogWrite(enA, 0);
+                digitalWrite(pwmB, LOW);
+                analogWrite(enB, 0);
                 break;
         }
     }
