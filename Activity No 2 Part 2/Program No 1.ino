@@ -28,28 +28,32 @@ void setup() {
 }
 
 void loop() {
-    int input;
-    Serial.begin(9600);
+    int userInput;
     if (Serial.available() > 0) {
-        input = Serial.parseInt();
-        if (input == 1) {
-            motor1.setSpeed(motorSpeed);
-            motor1.run(FORWARD);
-            motor2.setSpeed(motorSpeed);
-            motor2.run(BACKWARD);
-        } else if (input == 2) {
-            motor1.setSpeed(motorSpeed / 2);
-            motor1.run(FORWARD);
-            motor2.setSpeed(motorSpeed);
-            motor2.run(BACKWARD);
-        } else if (input == 3) {
-            motor1.setSpeed(motorSpeed);
-            motor1.run(FORWARD);
-            motor2.setSpeed(motorSpeed / 2);
-            motor2.run(BACKWARD);
-        } else if (input == 4) {
-            motor1.run(RELEASE);
-            motor2.run(RELEASE);
+        userInput = Serial.parseInt();
+        switch(userInput) {
+            case 1:
+                motor1.setSpeed(motorSpeed);
+                motor1.run(FORWARD);
+                motor2.setSpeed(motorSpeed);
+                motor2.run(BACKWARD);
+                break;
+            case 2:
+                motor1.setSpeed(motorSpeed / 2);
+                motor1.run(FORWARD);
+                motor2.setSpeed(motorSpeed);
+                motor2.run(BACKWARD);
+                break;
+            case 3:
+                motor1.setSpeed(motorSpeed);
+                motor1.run(FORWARD);
+                motor2.setSpeed(motorSpeed / 2);
+                motor2.run(BACKWARD);
+                break;
+            case 4:
+                motor1.run(RELEASE);
+                motor2.run(RELEASE);
+                break;
         }
     }
 }
