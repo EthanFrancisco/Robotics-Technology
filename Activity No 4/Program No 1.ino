@@ -25,20 +25,19 @@ void loop() {
 	if(Serial.available()) {
 		inputString = Serial.readString();
 		if((digitalRead(SW1) == LOW) && (digitalRead(SW2) == HIGH)) {
-			// Switch 1 Closed, inputString to Uppercase
-			inputString.toUpperCase();
-			Serial.println(inputString);
-    	} else if((digitalRead(SW1) == HIGH) && (digitalRead(SW2) == LOW)) {
-			// Switch 2 Closed, inputString to Lowercase
-			inputString.toLowerCase();
-			Serial.println(inputString);
-    	} else if((digitalRead(SW1) == LOW) && (digitalRead(SW2) == LOW)) {
-			// Both Switches Closed, Compare inputString with password
-    		if(inputString == password) {
-      			Serial.println("Password Matched");
-    		} else {
-      			Serial.println("Password Not Matched");
-    		}
+				// Switch 1 Closed, inputString to Uppercase
+				inputString.toUpperCase();
+				Serial.println(inputString);
+    		} else if((digitalRead(SW1) == HIGH) && (digitalRead(SW2) == LOW)) {
+				// Switch 2 Closed, inputString to Lowercase
+				inputString.toLowerCase();
+				Serial.println(inputString);
+    		} else if((digitalRead(SW1) == LOW) && (digitalRead(SW2) == LOW)) {
+				// Both Switches Closed, Compare inputString with password
+    			if(inputString == password)
+      				Serial.println("Password Matched");
+    			else
+      				Serial.println("Password Not Matched");
   		} else {
     		Serial.println(inputString[0]);
   		}
